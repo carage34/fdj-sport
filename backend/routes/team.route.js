@@ -22,9 +22,9 @@ teamRoute.route('/').get((req, res) => {
     if (error) {
       return next(error)
     } else {
-      res.json(data)
+      res.json(data);
     }
-  })
+  }).populate('players')
 })
 
 // Get single employee

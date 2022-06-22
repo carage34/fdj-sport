@@ -1,1 +1,8 @@
-<p>home works!</p>
+<nav class="navbar bg-light">
+  <form class="container-fluid">
+    <div class="input-group">
+      <span class="input-group-text" id="basic-addon1" aria-label="bouton rechercher">🔎</span>
+      <app-autocomplete class="form-control" (receiveLeague)="displayLeague($event)" [leagues]="leagues"></app-autocomplete>
+    </div>
+  </form>
+</nav>

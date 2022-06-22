@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // Define collection and schema
 let Player = new Schema({
   _id: {
-    type: Number
+    type: mongoose.Types.ObjectId,
   },
   name: {
     type: String

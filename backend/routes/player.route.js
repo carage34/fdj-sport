@@ -18,7 +18,6 @@ playerRoute.route('/create').post((req, res, next) => {
 
 // Get All Employees
 playerRoute.route('/').get((req, res) => {
-  console.log("oui")
   Player.find((error, data) => {
     console.log(data);
     if (error) {

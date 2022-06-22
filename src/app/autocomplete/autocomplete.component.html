@@ -1,0 +1,6 @@
+<input type="text" class="form-control" [(ngModel)]="searchText" (input)="suggest()" placeholder="Rechercher par championnats" aria-describedby="basic-addon1">
+<div class="dropdown-menu" [class.show]="this.isDisplayed()">
+  <div *ngFor="let suggestion of this.suggestions">
+    <button (click)="selectLeague(suggestion)" class="dropdown-item">{{suggestion.name}}</button>
+  </div>
+</div>

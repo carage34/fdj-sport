@@ -20,11 +20,12 @@ leagueRoute.route('/create').post((req, res, next) => {
 leagueRoute.route('/').get((req, res) => {
   League.find((error, data) => {
     if (error) {
-      return next(error)
+      //return next(error)
+      console.log(error)
     } else {
-      res.json(data)
+      res.json(data);
     }
-  })
+  }).populate('teams')
 })
 
 // Get single employee

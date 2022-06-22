@@ -4,12 +4,15 @@ const Schema = mongoose.Schema;
 // Define collection and schema
 let Team = new Schema({
   _id: {
-    type: Number
+    type: mongoose.Types.ObjectId,
   },
   name: {
     type: String
   },
-  players: [],
+  players: [{
+    type: mongoose.Types.ObjectId,
+    ref: "Player"
+  }],
   thumbnail: {
     type: String
   },

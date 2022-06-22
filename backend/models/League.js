@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const {mongo} = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define collection and schema
 let League = new Schema({
   _id: {
-    type: Number
+    type: mongoose.Types.ObjectId,
   },
    name: {
       type: String
@@ -12,7 +13,10 @@ let League = new Schema({
    sport: {
       type: String
    },
-   teams: []
+   teams: [{
+    type: mongoose.Types.ObjectId,
+     ref: "Team"
+   }]
 }, {
    collection: 'leagues'
 })

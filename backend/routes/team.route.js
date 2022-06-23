@@ -8,6 +8,7 @@ const TeamController = require("../controller/TeamController");
 
 router.get('/', TeamController.getAllTeam);
 router.get('/:id', TeamController.getTeam);
+router.post('/add', TeamController.createTeam);
 
 // // Ajouter un employé
 // teamRoute.route('/create').post((req, res, next) => {

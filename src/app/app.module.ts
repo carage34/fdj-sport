@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import { PlayerComponent } from './player/player.component';
 import { FormLeagueComponent } from './form-league/form-league.component';
+import { FormTeamComponent } from './form-team/form-team.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormLeagueComponent } from './form-league/form-league.component';
     HomeComponent,
     AutocompleteComponent,
     PlayerComponent,
-    FormLeagueComponent
+    FormLeagueComponent,
+    FormTeamComponent
   ],
   imports: [
     BrowserModule,

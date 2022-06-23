@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Player} from "../model/player.model";
-import {PlayerService} from "./player.service";
+import {PlayerService} from "../services/player.service";
 import {Team} from "../model/team.model";
 import {CurrenciesEnum} from "../enum/currencies.enum";
-import {getCurrencySymbol} from "@angular/common";
 
 @Component({
   selector: 'app-player',

@@ -15,8 +15,8 @@
 <div class="container-fluid">
   <ng-container *ngIf="this.teams.length">
     <div class="row">
-      <div *ngFor="let team of this.teams" class="col-md-4" (click)="router.navigate(['/team', team._id])">
-        <div >
+      <div *ngFor="let team of this.teams" class="col-sm-12 col-md-6" (click)="router.navigate(['/team', team._id])">
+        <div class="team mb-5">
           <img src="{{team.thumbnail}}">
         </div>
       </div>

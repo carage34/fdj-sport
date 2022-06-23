@@ -7,17 +7,8 @@ const router = express.Router()
 let League = require('../models/League')
 
 router.get('/', LeagueController.getAllLeagues);
+router.post('/add', LeagueController.createLeague);
 
-// // Ajouter une team
-// leagueRoute.route('/create').post((req, res, next) => {
-//   League.create(req.body, (error, data) => {
-//     if (error) {
-//       return next(error)
-//     } else {
-//       res.json(data)
-//     }
-//   })
-// })
 //
 // // Get All Employees
 // leagueRoute.route('/').get((req, res) => {

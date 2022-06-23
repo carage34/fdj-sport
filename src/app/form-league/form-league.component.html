@@ -1,16 +1,35 @@
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="alert alert-dismissible fade show mt-2" role="alert" [ngClass]="notif.type" *ngFor="let notif of this.notifs">
+  {{ notif.msg }}
+  <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="container-fluid">
+  <form [formGroup]="leagueForm">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="nomLeague">Nom du championnat</label>
+          <input type="nom" class="form-control" id="nomLeague" formControlName="name" aria-describedby="nomError" placeholder="Entrer le nom du championnat">
+          <small *ngIf="this.isErrorField('name')" id="nomError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="sport">Sport</label>
+          <input type="text" class="form-control" formControlName="sport" id="sport" placeholder="Entrer le sport">
+          <small *ngIf="this.isErrorField('sport')" id="sportError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <button type="submit" (click)="submit()" class="btn btn-primary mt-2"[disabled]="!leagueForm.valid" >Valider</button>
+  </form>
+</div>
+

@@ -6,20 +6,25 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import { PlayerComponent } from './player/player.component';
+import { FormLeagueComponent } from './form-league/form-league.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    PlayerComponent,
+    FormLeagueComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule
   ],
   providers: [],

@@ -9,13 +9,13 @@ import {environment} from "../../environments/environment";
 })
 export class HomeService {
   public  LeagueURL = "leagues";
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
+  /**
+   * Récupère les leagues
+   * @return Observable<League[]>
+   */
   public getLeagues(): Observable<League[]> {
     return this.http.get<League[]>(`${environment.baseUri}/${this.LeagueURL}`);
-  }
-
-  public getTeamsByLeague() {
-
   }
 }

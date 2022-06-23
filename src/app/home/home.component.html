@@ -1,3 +1,9 @@
+<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="this.error">
+   Une erreur est survenue lors de la récupération des championnats
+  <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <nav class="navbar bg-light">
   <form class="container-fluid">
     <div class="input-group">
@@ -6,3 +12,15 @@
     </div>
   </form>
 </nav>
+<div class="container-fluid">
+  <ng-container *ngIf="this.teams.length">
+    <div class="row">
+      <div *ngFor="let team of this.teams" class="col-md-4" (click)="router.navigate(['/team', team._id])">
+        <div >
+          <img src="{{team.thumbnail}}">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+

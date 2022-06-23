@@ -13,21 +13,31 @@ export class AutocompleteComponent implements OnInit {
   public searchText: string = "";
   constructor() { }
 
+  /**
+   * charge les suggestions au remplissage du champ
+   */
   suggest() {
     this.suggestions = this.leagues.filter(league => league.name.toLocaleLowerCase().startsWith(this.searchText.toLocaleLowerCase()));
-    console.log(this.suggestions)
   }
 
   ngOnInit(): void {
   }
 
-
-  isDisplayed() {
+  /**
+   * Conditionne l'affichage des suggestions
+   * @returns boolean
+   */
+  isDisplayed(): boolean {
     return this.suggestions.length > 0 && this.searchText.trim() !== '';
   }
 
+  /**
+   * clic sur une suggestion
+   * @param league suggestion cliqué
+   */
   selectLeague(league: League) {
+    this.suggestions = [];
+    this.searchText = league.name;
     this.receiveLeague.emit(league);
   }
-
 }

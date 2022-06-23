@@ -1,0 +1,20 @@
+<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="this.error">
+  Une erreur est survenue lors de la récupération des joueurs
+  <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row">
+  <div *ngFor="let player of this.players" class="col-md-6 player">
+    <div class="d-flex flex-row">
+      <div > <img src="{{ player.thumbnail}}" alt="photo joueur" width="150px" class="photo"></div>
+
+      <div >
+        <p><b>{{player.name}}</b></p>
+        <p><i>{{player.position}}</i></p>
+        <p>Date de naissance: {{ player.born | date: 'dd/MM/yyyy'}}</p>
+        <p>Price: {{this.getCurrencySymbol(player.signin.currency)}}{{ player.signin.amount | number}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import {CommonModule} from "@angular/common";
 import { PlayerComponent } from './player/player.component';
 import { FormLeagueComponent } from './form-league/form-league.component';
 import { FormTeamComponent } from './form-team/form-team.component';
+import { FormPlayerComponent } from './form-player/form-player.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormTeamComponent } from './form-team/form-team.component';
     AutocompleteComponent,
     PlayerComponent,
     FormLeagueComponent,
-    FormTeamComponent
+    FormTeamComponent,
+    FormPlayerComponent
   ],
   imports: [
     BrowserModule,

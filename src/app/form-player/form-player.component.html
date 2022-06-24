@@ -1,0 +1,89 @@
+<div class="alert alert-dismissible fade show mt-2" role="alert" [ngClass]="notif.type" *ngFor="let notif of this.notifs">
+  {{ notif.msg }}
+  <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="container-fluid">
+  <form [formGroup]="playerForm">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="nomPlayer">Nom du joueur</label>
+          <input type="nom" class="form-control" id="nomPlayer" formControlName="name" aria-describedby="nomError" placeholder="Entrer le nom du joueur">
+          <small *ngIf="this.isErrorField('name')" id="nomError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" formControlName="position" id="position" placeholder="Entrer la position">
+          <small *ngIf="this.isErrorField('position')" id="positionError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="thumbnail">Photo</label>
+          <input type="text" class="form-control" formControlName="thumbnail" id="thumbnail" placeholder="Entrer un lien vers la photo">
+          <small *ngIf="this.isErrorField('thumbnail')" id="thumbnailError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="born">Date de naissance</label>
+          <input type="date" class="form-control" formControlName="born" id="born" placeholder="Entrer la date de naissance">
+          <small *ngIf="this.isErrorField('born')" id="bornError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="montant">Montant</label>
+          <input type="number" class="form-control" formControlName="amount" id="montant" placeholder="Entrer le montant du transfert">
+          <small *ngIf="this.isErrorField('amount')" id="montantError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="monnaie">Monnaie</label>
+          <select class="form-control form-select" id="monnaie" formControlName="currency">
+            <option [ngValue]="monnaie.value" *ngFor="let monnaie of currenciesEnum | keyvalue">{{monnaie.value}}</option>
+          </select>
+          <small *ngIf="this.isErrorField('currency')" id="monnaieError" class="form-text text-muted error">
+            Ce champ est obligatoire
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="league">Selectionnez une équipe</label>
+        <select class="form-control form-select" id="league" [(ngModel)]="teamSelected"  [ngModelOptions]="{standalone: true}">
+          <option [ngValue]="team" *ngFor="let team of this.teams">{{team.name}}</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" (click)="submit()" class="btn btn-primary mt-2"[disabled]="!playerForm.valid" >Valider</button>
+  </form>
+</div>
+

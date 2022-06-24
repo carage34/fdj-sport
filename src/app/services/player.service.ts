@@ -10,9 +10,15 @@ import {environment} from "../../environments/environment";
 export class PlayerService {
 
   constructor(private readonly http: HttpClient) { }
-  public teamURL = "teams"
+  public playerURL = "players";
+  public addURL = "add";
 
-  public getJoueurs(teamId: string): Observable<Team> {
-    return this.http.get<Team>(`${environment.baseUri}/${this.teamURL}/${teamId}`)
+  public getPlayers(playerId: string): Observable<Team> {
+    return this.http.get<Team>(`${environment.baseUri}/${this.playerURL}/${playerId}`)
+  }
+
+  public addPlayer(name: string, position: string, born:string, thumbnail:string, team: Team, amount: number, currency:string):Observable<any> {
+    return this.http.post
+    (`${environment.baseUri}/${this.playerURL}/${this.addURL}`, {amount: amount, currency: currency, name:name, position:position, born:born, thumbnail:thumbnail, teamId:team._id})
   }
 }

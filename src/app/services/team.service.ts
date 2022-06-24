@@ -15,7 +15,6 @@ export class TeamService {
   constructor(private readonly httpClient: HttpClient) { }
 
   public addTeam(name: string, thumbnail: string, league: League): Observable<any> {
-    console.log(league._id);
     return this.httpClient.post(`${environment.baseUri}/${this.teamURL}/${this.addURL}`, {name: name, thumbnail: thumbnail, leagueId: league._id})
   }
 

@@ -11,6 +11,7 @@ export class AutocompleteComponent implements OnInit {
   @Output() receiveLeague: EventEmitter<League> = new EventEmitter<League>()
   public suggestions: League[] = [];
   public searchText: string = "";
+  public leagueSelected: League | null = null;
   constructor() { }
 
   /**
@@ -39,5 +40,6 @@ export class AutocompleteComponent implements OnInit {
     this.suggestions = [];
     this.searchText = league.name;
     this.receiveLeague.emit(league);
+    this.leagueSelected = league;
   }
 }

@@ -26,11 +26,13 @@ app.use(
   }),
 )
 app.use(cors())
-// app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')))
-// app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-crud-app')))
+app.use(express.static(process.cwd()+"../my-app/dist/fdj/"));
 app.use('/teams', teamRoute);
 app.use('/leagues', leagueRoute);
 app.use('/players', playerRoute);
+
+
+app.use('/', express.static(path.join(__dirname, '/../dist/fdj/')))
 
 // Create port
 const port = process.env.PORT || 4000

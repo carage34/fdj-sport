@@ -60,9 +60,6 @@ export class FormPlayerComponent implements OnInit {
     const born = this.playerForm.get("born")?.value;
     const amount = this.playerForm.get("amount")?.value;
     const currency =  this.playerForm.get("currency")?.value;
-    console.log(amount);
-    console.log(this.teamSelected)
-    console.log(currency)
     if(position && name && born && thumbnail && amount && currency) {
       this.playerService.addPlayer(name, position, born, thumbnail, this.teamSelected, amount, currency).subscribe(() => {
         const msg = `Le joueur ${name} a bien été ajouté`;

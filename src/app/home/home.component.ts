@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     // Récupération des leagues
     this.leagueService.getLeagues().subscribe((leagues: League[]) => {
       this.leagues = leagues;
-      console.log(this.leagues);
     },error => {
       this.notifs.push(new Notif(TypeEnum.DANGER, error));
     })

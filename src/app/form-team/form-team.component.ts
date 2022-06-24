@@ -6,6 +6,8 @@ import {LeagueService} from "../services/league.service";
 import {TypeEnum} from "../enum/type-alert.enum";
 import {League} from "../model/league.model";
 import {TeamService} from "../services/team.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Team} from "../model/team.model";
 
 @Component({
   selector: 'app-form-team',
@@ -15,7 +17,8 @@ import {TeamService} from "../services/team.service";
 export class FormTeamComponent implements OnInit {
 
   public leagueSelected: League | null = null;
-
+  public teamId: string | null = "";
+  public oldLeague: League = new League();
   teamForm = new FormGroup({
     name: new FormControl('', [Validators.required, CustomValidator.noWhitespaceValidator]),
     thumbnail: new FormControl('', [Validators.required, CustomValidator.noWhitespaceValidator]),
@@ -24,13 +27,24 @@ export class FormTeamComponent implements OnInit {
   public name: string = "";
   public notifs: Notif[] = [];
   public leagues: League[] = [];
-  constructor(private readonly leagueService: LeagueService, private readonly teamService: TeamService) {
-    this.leagueService.getLeagues().subscribe((leagues:League[]) => {
-      this.leagues = leagues;
-      this.leagueSelected = leagues[0];
-    }, (error) => {
-      this.notifs.push(new Notif(TypeEnum.DANGER, error));
-    })
+  public team: Team = new Team();
+  constructor(private readonly leagueService: LeagueService, private readonly teamService: TeamService, private readonly route: ActivatedRoute) {
+    this.teamId = this.route.snapshot.paramMap.get('id');
+    console.log(this.teamId);
+    if(this.teamId) {
+      this.teamService.getTeam(this.teamId).subscribe((res: any) => {
+        this.team = res.team;
+        this.teamForm.patchValue({
+          name: this.team.name,
+          thumbnail: this.team.thumbnail
+        })
+        console.log("quoi")
+        this.getLeagues(res.league[0]);
+      })
+    } else {
+      this.getLeagues(new League());
+    }
+
   }
 
   /**
@@ -38,6 +52,22 @@ export class FormTeamComponent implements OnInit {
    */
   ngOnInit(): void {
 
+  }
+
+  getLeagues(leagueAssociated: League) {
+    console.log("quoi2")
+    this.leagueService.getLeagues().subscribe((leagues:League[]) => {
+      this.leagues = leagues;
+      if(!this.teamId) {
+        this.leagueSelected = leagues[0];
+      } else {
+        this.oldLeague = leagueAssociated;
+        this.leagueSelected = this.leagues.filter(league => league._id === leagueAssociated._id)[0];
+      }
+
+    }, (error) => {
+      this.notifs.push(new Notif(TypeEnum.DANGER, error));
+    })
   }
 
   /**
@@ -49,21 +79,30 @@ export class FormTeamComponent implements OnInit {
   }
 
   /**
-   * Ajout du championnat en base
+   * Ajout d'une team en base
    */
   public submit() {
     this.notifs = [];
     const name = this.teamForm.get("name")?.value;
     const thumbnail = this.teamForm.get("thumbnail")?.value;
     if(thumbnail && name && this.leagueSelected) {
-      this.teamService.addTeam(name, thumbnail, this.leagueSelected).subscribe(() => {
-        const msg = `L'équipe ${name} a bien été ajouté`;
-        this.notifs.push(new Notif(TypeEnum.SUCCESS, msg));
-        this.teamForm.reset();
-      }, (error) => {
-        this.notifs.push(new Notif(TypeEnum.DANGER, error));
-      })
+      // Cas création team
+      if(!this.teamId) {
+        this.teamService.addTeam(name, thumbnail, this.leagueSelected).subscribe(() => {
+          const msg = `L'équipe ${name} a bien été ajouté`;
+          this.notifs.push(new Notif(TypeEnum.SUCCESS, msg));
+          this.teamForm.reset();
+        }, (error) => {
+          this.notifs.push(new Notif(TypeEnum.DANGER, error));
+        })
+      } else {
+        this.teamService.updateTeam(name, thumbnail, this.leagueSelected, this.teamId, this.oldLeague).subscribe((res) => {
+          const msg = `L'équipe ${name} a bien été mis à jour`;
+          this.notifs.push(new Notif(TypeEnum.SUCCESS, msg));
+        }, (error) => {
+          this.notifs.push(new Notif(TypeEnum.DANGER, error));
+        })
+      }
     }
   }
-
 }

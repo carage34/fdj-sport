@@ -11,6 +11,7 @@ import {Team} from "../model/team.model";
 export class TeamService {
   public teamURL = "teams";
   public addURL = "add"
+  public updateURL = "update"
   constructor(private readonly httpClient: HttpClient) { }
 
   public addTeam(name: string, thumbnail: string, league: League): Observable<any> {
@@ -26,8 +27,12 @@ export class TeamService {
     return this.httpClient.get<Team[]>(`${environment.baseUri}/${this.teamURL}`);
   }
 
-  public getTeam(id: string): Observable<Team> {
+  public getTeam(id: string): Observable<any> {
     return this.httpClient.get<Team>(`${environment.baseUri}/${this.teamURL}/${id}`);
+  }
+
+  public updateTeam(name: string, thumbnail: string, league: League, idTeam: string, oldLeague:League): Observable<any> {
+    return this.httpClient.post<Team>(`${environment.baseUri}/${this.teamURL}/${this.updateURL}/${idTeam}`, {name: name, thumbnail: thumbnail, leagueId: league._id, oldLeagueId:oldLeague._id});
   }
 
 }

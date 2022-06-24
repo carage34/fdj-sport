@@ -18,6 +18,7 @@
       <div *ngFor="let team of this.teams" class="col-sm-12 col-md-6" (click)="router.navigate(['/team', team._id])">
         <div class="team mb-5">
           <img src="{{team.thumbnail}}">
+          <button class="btn btn-primary" [routerLink]="['edit-team', team._id]">Modifier</button>
         </div>
       </div>
     </div>

@@ -12,7 +12,8 @@ const routes: Routes = [
   {path: 'team/:id', component: PlayerComponent},
   {path: 'add-league', component: FormLeagueComponent},
   {path: 'add-team', component: FormTeamComponent},
-  {path: 'add-player', component: FormPlayerComponent}
+  {path: 'add-player', component: FormPlayerComponent},
+  {path: 'edit-team/:id', component: FormTeamComponent}
 ];
 
 @NgModule({

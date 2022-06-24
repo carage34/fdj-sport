@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {Player} from "../model/player.model";
 import {PlayerService} from "../services/player.service";
-import {Team} from "../model/team.model";
 import {CurrenciesEnum} from "../enum/currencies.enum";
 import {TeamService} from "../services/team.service";
+import {Notif} from "../model/notif.model";
+import {TypeEnum} from "../enum/type-alert.enum";
 
 @Component({
   selector: 'app-player',
@@ -15,6 +16,7 @@ export class PlayerComponent implements OnInit {
   public id: string | null;
   public players: Player[] = [];
   public error = false;
+  public notifs: Notif[] = []
   constructor(private route: ActivatedRoute, private playerService: PlayerService, private readonly teamService: TeamService) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -22,11 +24,10 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     //Recupère l'id de l'équipe via l'URL
     if(this.id) {
-      this.teamService.getTeam(this.id).subscribe((team: Team) => {
-        this.players = team.players;
-        this.error = false;
+      this.teamService.getTeam(this.id).subscribe((res: any) => {
+        this.players = res.team.players;
       }, (error) => {
-        this.error = true;
+        this.notifs.push(new Notif(TypeEnum.DANGER, error));
       })
     }
   }

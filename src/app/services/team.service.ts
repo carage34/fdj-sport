@@ -27,10 +27,22 @@ export class TeamService {
     return this.httpClient.get<Team[]>(`${environment.baseUri}/${this.teamURL}`);
   }
 
+  /**
+   * Récupère les infos d'une team
+   * @param id
+   */
   public getTeam(id: string): Observable<any> {
     return this.httpClient.get<Team>(`${environment.baseUri}/${this.teamURL}/${id}`);
   }
 
+  /**
+   * Mise à jour d'une team
+   * @param name
+   * @param thumbnail
+   * @param league
+   * @param idTeam
+   * @param oldLeague
+   */
   public updateTeam(name: string, thumbnail: string, league: League, idTeam: string, oldLeague:League): Observable<any> {
     return this.httpClient.post<Team>(`${environment.baseUri}/${this.teamURL}/${this.updateURL}/${idTeam}`, {name: name, thumbnail: thumbnail, leagueId: league._id, oldLeagueId:oldLeague._id});
   }

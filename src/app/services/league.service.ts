@@ -21,6 +21,11 @@ export class LeagueService {
     return this.http.get<League[]>(`${environment.baseUri}/${this.LeagueURL}`);
   }
 
+  /**
+   * Ajout d'une league en base
+   * @param name
+   * @param sport
+   */
   public addLeague(name: string, sport: string) {
     return this.http.post(`${environment.baseUri}/${this.LeagueURL}/${this.addURL}`, {name:name, sport: sport});
   }

@@ -14,7 +14,7 @@ exports.getAllPlayers = (req, res) => {
 
 exports.getPlayer = (req, res) => {
   Player.findById(req.params.id)
-    .then(team => res.status(200).json(team))
+    .then(player => res.status(200).json(player))
     .catch(() => res.status(500).send('Impossible de récupérer le joueur'));
 }
 
@@ -31,7 +31,7 @@ exports.createPlayer = (req, res) => {
     born: new Date(req.body.born)
   })
 
-  // Ajoute la team à la league leagueId
+    //Ajoute le joueur à l'équipe
   Team.findByIdAndUpdate(req.body.teamId,  {$push: {"players": {_id: mongoose.mongo.ObjectId(player._id)}}}).then((result) => {console.log(result)}).catch((error) => console.log(error));
   player.save().then(result => res.status(200).json({message: result})).catch(() => res.status(500).send('Impossible de créer le joueur'));
 }

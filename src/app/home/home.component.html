@@ -1,5 +1,5 @@
-<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="this.error">
-   Une erreur est survenue lors de la récupération des championnats
+<div class="alert alert-dismissible fade show mt-2" role="alert" [ngClass]="notif.type" *ngFor="let notif of this.notifs">
+  {{ notif.msg }}
   <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -17,7 +17,7 @@
     <div class="row">
       <div *ngFor="let team of this.teams" class="col-sm-12 col-md-6" (click)="router.navigate(['/team', team._id])">
         <div class="team mb-5">
-          <img src="{{team.thumbnail}}">
+          <img width="300px" src="{{team.thumbnail}}">
           <button class="btn btn-primary" [routerLink]="['edit-team', team._id]">Modifier</button>
         </div>
       </div>

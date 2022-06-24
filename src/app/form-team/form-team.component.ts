@@ -30,32 +30,32 @@ export class FormTeamComponent implements OnInit {
   public team: Team = new Team();
   constructor(private readonly leagueService: LeagueService, private readonly teamService: TeamService, private readonly route: ActivatedRoute) {
     this.teamId = this.route.snapshot.paramMap.get('id');
-    console.log(this.teamId);
+
+
     if(this.teamId) {
+      // Mode modification
       this.teamService.getTeam(this.teamId).subscribe((res: any) => {
         this.team = res.team;
         this.teamForm.patchValue({
           name: this.team.name,
           thumbnail: this.team.thumbnail
         })
-        console.log("quoi")
         this.getLeagues(res.league[0]);
       })
     } else {
+      // Mode création
       this.getLeagues(new League());
     }
-
   }
 
-  /**
-   * Récupération des leagues
-   */
+
   ngOnInit(): void {
 
   }
-
+  /**
+   * Récupération des leagues
+   */
   getLeagues(leagueAssociated: League) {
-    console.log("quoi2")
     this.leagueService.getLeagues().subscribe((leagues:League[]) => {
       this.leagues = leagues;
       if(!this.teamId) {
@@ -96,6 +96,7 @@ export class FormTeamComponent implements OnInit {
           this.notifs.push(new Notif(TypeEnum.DANGER, error));
         })
       } else {
+        // Cas mise à jour
         this.teamService.updateTeam(name, thumbnail, this.leagueSelected, this.teamId, this.oldLeague).subscribe((res) => {
           const msg = `L'équipe ${name} a bien été mis à jour`;
           this.notifs.push(new Notif(TypeEnum.SUCCESS, msg));

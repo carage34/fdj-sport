@@ -19,7 +19,6 @@ exports.getTeam = (req, res) => {
       .then(team => res.status(200).json({team: team, league: league}))
       .catch(() => res.status(500).send('Impossible de récupérer l\'équipe'));
   })
-
 }
 
 exports.createTeam = (req, res) => {

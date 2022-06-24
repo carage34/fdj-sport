@@ -1,5 +1,5 @@
-<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="this.error">
-  Une erreur est survenue lors de la récupération des joueurs
+<div class="alert alert-dismissible fade show mt-2" role="alert" [ngClass]="notif.type" *ngFor="let notif of this.notifs">
+  {{ notif.msg }}
   <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

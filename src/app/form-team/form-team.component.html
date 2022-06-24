@@ -37,7 +37,7 @@
         </select>
       </div>
     </div>
-    <button type="submit" (click)="submit()" class="btn btn-primary mt-2"[disabled]="!teamForm.valid" >Valider</button>
+    <button type="submit" (click)="submit()" class="btn btn-primary mt-2"[disabled]="!teamForm.valid" >{{this.teamId ? 'Modifier' : 'Valider'}}</button>
   </form>
 </div>
 

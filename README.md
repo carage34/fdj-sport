@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Lancement de l'application
 
-Lancer la commande `node server.js` dans le dossier backend et ouvrez l'url `http://localhost:3000/`
+Lancez la commande `node server.js` dans le dossier backend et ouvrez l'url `http://localhost:3000/`
 
 ## Documentation Postman
 

@@ -1,12 +1,12 @@
 const express = require('express')
-const app = express()
 const router = express.Router()
 
-// Employee model
+// Player Route
 let Player = require('../models/Player')
 const PlayerController = require("../controller/PlayerController");
-
+//Récupère tout les joueurs
 router.get('/', PlayerController.getAllPlayers);
+//Ajoute un joueur
 router.post('/add', PlayerController.createPlayer);
 
 module.exports = router

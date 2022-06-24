@@ -1,12 +1,13 @@
 const express = require('express')
 const LeagueController = require('../controller/LeagueController')
-const app = express()
 const router = express.Router()
 
-// Employee model
+// League Route
 let League = require('../models/League')
 
+// Récupère toutes les leagues
 router.get('/', LeagueController.getAllLeagues);
+// Création d'une league
 router.post('/add', LeagueController.createLeague);
 
 module.exports = router

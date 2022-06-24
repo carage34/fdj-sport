@@ -28,10 +28,10 @@ exports.createPlayer = (req, res) => {
       amount: req.body.amount,
       currency: req.body.currency
     },
-    born: new Date(req.body.born)
+    born: req.body.born
   })
 
     //Ajoute le joueur à l'équipe
-  Team.findByIdAndUpdate(req.body.teamId,  {$push: {"players": {_id: mongoose.mongo.ObjectId(player._id)}}}).then((result) => {console.log(result)}).catch((error) => console.log(error));
-  player.save().then(result => res.status(200).json({message: result})).catch(() => res.status(500).send('Impossible de créer le joueur'));
+  Team.findByIdAndUpdate(req.body.teamId,  {$push: {"players": {_id: mongoose.mongo.ObjectId(player._id)}}}).then((result) => {}).catch((error) => {});
+  player.save().then(result => res.status(200).json({message: result})).catch((err) => {res.status(500).send('Impossible de créer le joueur'); console.log(err)});
 }
